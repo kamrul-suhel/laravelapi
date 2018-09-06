@@ -2,6 +2,7 @@
 
 use App\Category;
 use App\Product;
+use App\Seller;
 use App\User;
 use Faker\Generator as Faker;
 
@@ -43,5 +44,16 @@ $factory->define(Product::class, function (Faker $faker) {
         'status' => $faker->randomElement([Product::UNAVALIABLE_PRODUCT, Product::AVALIABLE_PRODUCT]),
         'image' => $faker->randomElement(['1.jpg', '2.jgp', '3.jpg']),
         'seller_id' => User::all()->random()->id
+    ];
+});
+
+$factory->define(\App\Transaction::class, function(Faker $faker){
+
+    $seller = Seller::has('products')->get()->random();
+    $buyer = User::all()->except($seller->id)->random();
+    return [
+      'quantity' => $faker->numberBetween(1,4),
+        'buyer_id' => $buyer->id,
+        'product_id' => $seller->products->random()->id
     ];
 });

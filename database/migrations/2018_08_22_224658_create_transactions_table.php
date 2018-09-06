@@ -20,8 +20,8 @@ class CreateTransactionsTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->timestamps();
 
-            $table->foregin('buyer_id')->referenses('id')->on('users');
-            $table->foregin('product_id')->referenses('id')->on('products');
+            $table->foreign('buyer_id')->references('id')->on('users');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

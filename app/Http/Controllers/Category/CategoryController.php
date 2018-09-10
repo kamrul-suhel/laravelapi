@@ -22,6 +22,7 @@ class CategoryController extends ApiController
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -53,20 +54,29 @@ class CategoryController extends ApiController
     /**
      * @param Request $request
      * @param Category $category
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->fill($request->only(['name','description']));
+        if($category->isClean){
+            return $this->errorResponse('Value must be different from previous', 422);
+        }
+
+        if($category->save()){
+            return $this->showOne($category);
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy(Category $category)
     {
-        //
+        if($category->delete()){
+            return $this->showOne($category);
+        }
     }
 }

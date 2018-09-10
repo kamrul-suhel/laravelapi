@@ -3,9 +3,14 @@
 namespace App;
 
 use App\Scopes\SellerScope;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Seller extends User
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
     protected static function boot()
     {
         parent::boot();

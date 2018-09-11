@@ -21,6 +21,7 @@ class TransactionController extends ApiController
 
     /**
      * @param Transaction $transaction
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Transaction $transaction)
     {

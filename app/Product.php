@@ -9,6 +9,9 @@ class Product extends Model
 {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+    protected $hidden = [
+        'pivot'
+    ];
 
     const AVALIABLE_PRODUCT = 'avaliable';
     const UNAVALIABLE_PRODUCT = 'unavaliable';

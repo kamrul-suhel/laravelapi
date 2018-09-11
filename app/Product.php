@@ -26,7 +26,7 @@ class Product extends Model
     }
 
     public function seller(){
-        return $this->belongTo(Seller::class);
+        return $this->belongsTo(Seller::class);
     }
 
     public function transactions(){
